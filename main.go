@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 /* SISTEM PENERIMAAN MAHASISWA BUKIT DURI
-Sistem bedasarkan seleksi nilai UTBK apabila nilai lebih dari (?)) maka diterima
+Sistem bedasarkan seleksi nilai UTBK apabila nilai lebih dari 600 maka diterima
 
 ======== SPESIFIKASI UMUM
 ✅ Program harus dibuat secara modular dengan menggunakan subprogram.
