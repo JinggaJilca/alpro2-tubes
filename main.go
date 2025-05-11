@@ -62,22 +62,74 @@ func main() {
 	// calonMahasiswa[18] = dataPendaftar{nisn: 1234567908, nama: "Hendri Susilo", tempatLahir: "Jakarta", tanggalLahir: "2000-07-19", jenisKelamin: "Laki-laki", agama: "Islam", email: "hendri@email.com", jurusan: "IPA", asalSekolah: "SMA 19 Jakarta", tahunLulus: 2018, jurusanYangDituju: "Teknik Komputer", nilaiUTBK: 690}
 	// calonMahasiswa[19] = dataPendaftar{nisn: 1234567909, nama: "Siti Mulyani", tempatLahir: "Semarang", tanggalLahir: "2001-08-20", jenisKelamin: "Perempuan", agama: "Hindu", email: "siti@email.com", jurusan: "IPS", asalSekolah: "SMA 20 Semarang", tahunLulus: 2019, jurusanYangDituju: "Manajemen", nilaiUTBK: 660}
 
-	for i, p := range calonMahasiswa {
-		fmt.Println(i+1, ". NISN: ", p.nisn)
-		fmt.Println("Nama: ", p.nama)
-		fmt.Println("Tempat Lahir: ", p.tempatLahir)
-		fmt.Println("Tanggal Lahir: ", p.tanggalLahir)
-		fmt.Println("Jenis Kelamin: ", p.jenisKelamin)
-		fmt.Println("Agama: ", p.agama)
-		fmt.Println("Email: ", p.email)
-		fmt.Println("Jurusan: ", p.jurusan)
-		fmt.Println("Asal Sekolah: ", p.asalSekolah)
-		fmt.Println("Tahun Lulus: ", p.tahunLulus)
-		fmt.Println("Jurusan yang Dituju: ", p.jurusanYangDituju)
-		fmt.Println("Nilai UTBK: ", p.nilaiUTBK)
-		fmt.Println("Status: ", p.status)
-		fmt.Println()
+	//Menampilkan data calon mahasiswa
+	/*
+		for i, p := range calonMahasiswa {
+			fmt.Println(i+1, ". NISN: ", p.nisn)
+			fmt.Println("Nama: ", p.nama)
+			fmt.Println("Tempat Lahir: ", p.tempatLahir)
+			fmt.Println("Tanggal Lahir: ", p.tanggalLahir)
+			fmt.Println("Jenis Kelamin: ", p.jenisKelamin)
+			fmt.Println("Agama: ", p.agama)
+			fmt.Println("Email: ", p.email)
+			fmt.Println("Jurusan: ", p.jurusan)
+			fmt.Println("Asal Sekolah: ", p.asalSekolah)
+			fmt.Println("Tahun Lulus: ", p.tahunLulus)
+			fmt.Println("Jurusan yang Dituju: ", p.jurusanYangDituju)
+			fmt.Println("Nilai UTBK: ", p.nilaiUTBK)
+			fmt.Println("Status: ", p.status)
+			fmt.Println()
+		}
+	*/
+	fmt.Println("======= SELAMAT DATANG ADMIN =======")
+	fmt.Println("Penerimaan Mahasiswa Bukit Duri")
+	switch mainMenu() {
+	case 1:
+		fmt.Println("Menampilkan semua data")
+		for i, p := range calonMahasiswa {
+			fmt.Println(i+1, ". NISN: ", p.nisn)
+			fmt.Println("Nama: ", p.nama)
+			fmt.Println("Tempat Lahir: ", p.tempatLahir)
+			fmt.Println("Tanggal Lahir: ", p.tanggalLahir)
+			fmt.Println("Jenis Kelamin: ", p.jenisKelamin)
+			fmt.Println("Agama: ", p.agama)
+			fmt.Println("Email: ", p.email)
+			fmt.Println("Jurusan: ", p.jurusan)
+			fmt.Println("Asal Sekolah: ", p.asalSekolah)
+			fmt.Println("Tahun Lulus: ", p.tahunLulus)
+			fmt.Println("Jurusan yang Dituju: ", p.jurusanYangDituju)
+			fmt.Println("Nilai UTBK: ", p.nilaiUTBK)
+			fmt.Println("Status: ", p.status)
+			fmt.Println()
+		}
+
+	case 2:
+		fmt.Println("Urutkan data bedasarkan kategori")
+		//Penguruan dengan selection sort dan insertion sort harus bisa menaik (ascending) atau menurun (descending)
+	case 3:
+		fmt.Println("Tambah data")
+	case 4:
+		//Melakukan pencarian data dengan sequential search dan binary search
+		fmt.Println("Ubah data")
+	case 5:
+		fmt.Println("Hapus data")
+	case 6:
+		fmt.Println("Terima kasih telah menggunakan sistem ini")
 	}
+
+}
+func mainMenu() int {
+	var pilihan int
+	fmt.Println("======= MENU UTAMA =======")
+	fmt.Println("1. Tampilkan Semua Data")
+	fmt.Println("2. Urutkan Data Sesuai kategori")
+	fmt.Println("3. Tambah Data")
+	fmt.Println("4. Ubah Data")
+	fmt.Println("5. Hapus Data")
+	fmt.Println("6. Keluar")
+	fmt.Print("Pilih menu: ")
+	fmt.Scanln(&pilihan)
+	return pilihan
 
 }
 
