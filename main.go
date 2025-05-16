@@ -125,10 +125,10 @@ selesai:
 				switch metode {
 				case 1:
 					fmt.Println("Pengurutan dengan Selection Sort (Ascending)")
-					// panggil fungsi sort
-
+					selectionSortAscending(&calonMahasiswa)
 				case 2:
 					fmt.Println("Pengurutan dengan Selection Sort (Descending)")
+					selectionSortDescending(&calonMahasiswa)
 				case 3:
 					fmt.Println("Pengurutan dengan Insertion Sort (Ascending)")
 				case 4:
@@ -187,6 +187,32 @@ func status(calonMahasiswa *dataSiswa) string {
 		}
 	}
 	return status
+}
+
+// Fungsi untuk mengurutkan data menggunakan selection sort ascending
+func selectionSortAscending(calonMahasiswa *dataSiswa){
+	for i := 0; i < len(calonMahasiswa)-1; i++{
+		idx_min := i
+		for j := i + 1; j < len(calonMahasiswa); j++{
+			if calonMahasiswa[j].nilaiUTBK < calonMahasiswa[idx_min].nilaiUTBK{
+				idx_min = j
+			}
+		}
+			calonMahasiswa[i], calonMahasiswa[idx_min] = calonMahasiswa[idx_min], calonMahasiswa[i]
+	}
+}
+
+// Fungsi untuk mengurutkan data menggunakan selection sort ascending
+func selectionSortDescending(calonMahasiswa *dataSiswa){
+	for i := 0; i < len(calonMahasiswa)-1; i++{
+		idx_min := i
+		for j := i + 1; j < len(calonMahasiswa); j++{
+			if calonMahasiswa[j].nilaiUTBK >calonMahasiswa[idx_min].nilaiUTBK{
+				idx_min = j
+			}
+		}
+			calonMahasiswa[i], calonMahasiswa[idx_min] = calonMahasiswa[idx_min], calonMahasiswa[i]
+	}
 }
 
 //Fungsi untuk menambah data
