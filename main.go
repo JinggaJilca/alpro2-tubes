@@ -116,22 +116,24 @@ func main() {
 		fmt.Print("Masukkan banyak data yang akan ditambahkan: ")
 		fmt.Scan(&banyakData)
 		tambahData(&calonMahasiswa, banyakData)
-		// for i := 0; i < banyakData; i++ {
-		// 	fmt.Println(i+1, ". NISN: ", calonMahasiswa[i].nisn)
-		// 	fmt.Println("Nama: ", calonMahasiswa[i].nama)
-		// 	fmt.Println("Tempat Lahir: ", calonMahasiswa[i].tempatLahir)
-		// 	fmt.Println("Tanggal Lahir: ", calonMahasiswa[i].tanggalLahir)
-		// 	fmt.Println("Jenis Kelamin: ", calonMahasiswa[i].jenisKelamin)
-		// 	fmt.Println("Agama: ", calonMahasiswa[i].agama)
-		// 	fmt.Println("Email: ", calonMahasiswa[i].email)
-		// 	fmt.Println("Jurusan: ", calonMahasiswa[i].jurusan)
-		// 	fmt.Println("Asal Sekolah: ", calonMahasiswa[i].asalSekolah)
-		// 	fmt.Println("Tahun Lulus: ", calonMahasiswa[i].tahunLulus)
-		// 	fmt.Println("Jurusan yang Dituju: ", calonMahasiswa[i].jurusanYangDituju)
-		// 	fmt.Println("Nilai UTBK: ", calonMahasiswa[i].nilaiUTBK)
-		// 	fmt.Println("Status: ", calonMahasiswa[i].status)
-		// 	fmt.Println()
+		/*
+		for i := 0; i < banyakData; i++ {
+			fmt.Println(i+1, ". NISN: ", calonMahasiswa[i].nisn)
+			fmt.Println("Nama: ", calonMahasiswa[i].nama)
+			fmt.Println("Tempat Lahir: ", calonMahasiswa[i].tempatLahir)
+			fmt.Println("Tanggal Lahir: ", calonMahasiswa[i].tanggalLahir)
+			fmt.Println("Jenis Kelamin: ", calonMahasiswa[i].jenisKelamin)
+			fmt.Println("Agama: ", calonMahasiswa[i].agama)
+			fmt.Println("Email: ", calonMahasiswa[i].email)
+			fmt.Println("Jurusan: ", calonMahasiswa[i].jurusan)
+			fmt.Println("Asal Sekolah: ", calonMahasiswa[i].asalSekolah)
+			fmt.Println("Tahun Lulus: ", calonMahasiswa[i].tahunLulus)
+			fmt.Println("Jurusan yang Dituju: ", calonMahasiswa[i].jurusanYangDituju)
+			fmt.Println("Nilai UTBK: ", calonMahasiswa[i].nilaiUTBK)
+			fmt.Println("Status: ", calonMahasiswa[i].status)
+			fmt.Println()
 		}
+			*/
 	case 4:
 		//Melakukan pencarian data dengan sequential search dan binary search
 		fmt.Println("Ubah data")
