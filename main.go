@@ -35,7 +35,7 @@ type dataMahasigma struct {
 	jurusan string
 }
 
-const max = 20
+const max = 10
 
 type dataSiswa = [max]dataPendaftar
 
@@ -44,12 +44,15 @@ func main() {
 	// var mahasigma [10]dataMahasigma
 
 	//Data dummy calon mahasiswa
-	calonMahasiswa[0] = dataPendaftar{nisn: 1234567890, nama: "Andi Pratama", tempatLahir: "Surabaya", tanggalLahir: "2000-01-01", jenisKelamin: "Laki-laki", agama: "Islam", email: "andi@email.com", jurusan: "IPA", asalSekolah: "SMA 1 Surabaya", tahunLulus: 2018, jurusanYangDituju: "Teknik Informatika", nilaiUTBK: 700}
-	calonMahasiswa[1] = dataPendaftar{nisn: 1234567891, nama: "Siti Nurjanah", tempatLahir: "Malang", tanggalLahir: "2001-02-02", jenisKelamin: "Perempuan", agama: "Islam", email: "siti@email.com", jurusan: "IPS", asalSekolah: "SMA 2 Malang", tahunLulus: 2019, jurusanYangDituju: "Manajemen", nilaiUTBK: 650}
+	//Nilai UTBK Min 0
+	//Nilai UTBK Max 1000
+
+	calonMahasiswa[0] = dataPendaftar{nisn: 1234567890, nama: "Andi Pratama", tempatLahir: "Surabaya", tanggalLahir: "2000-01-01", jenisKelamin: "Laki-laki", agama: "Islam", email: "andi@email.com", jurusan: "IPA", asalSekolah: "SMA 1 Surabaya", tahunLulus: 2018, jurusanYangDituju: "Teknik Informatika", nilaiUTBK: 0}
+	calonMahasiswa[1] = dataPendaftar{nisn: 1234567891, nama: "Siti Nurjanah", tempatLahir: "Malang", tanggalLahir: "2001-02-02", jenisKelamin: "Perempuan", agama: "Islam", email: "siti@email.com", jurusan: "IPS", asalSekolah: "SMA 2 Malang", tahunLulus: 2019, jurusanYangDituju: "Manajemen", nilaiUTBK: 1}
 	calonMahasiswa[2] = dataPendaftar{nisn: 1234567892, nama: "Budi Santoso", tempatLahir: "Surabaya", tanggalLahir: "2000-03-03", jenisKelamin: "Laki-laki", agama: "Kristen", email: "budi@email.com", jurusan: "IPA", asalSekolah: "SMA 3 Surabaya", tahunLulus: 2019, jurusanYangDituju: "Teknik Mesin", nilaiUTBK: 710}
 	calonMahasiswa[3] = dataPendaftar{nisn: 1234567893, nama: "Dewi Lestari", tempatLahir: "Bandung", tanggalLahir: "1999-04-04", jenisKelamin: "Perempuan", agama: "Hindu", email: "dewi@email.com", jurusan: "IPA", asalSekolah: "SMA 4 Bandung", tahunLulus: 2018, jurusanYangDituju: "Teknik Elektro", nilaiUTBK: 720}
 	calonMahasiswa[4] = dataPendaftar{nisn: 1234567894, nama: "Fajar Ramadhan", tempatLahir: "Yogyakarta", tanggalLahir: "2000-05-05", jenisKelamin: "Laki-laki", agama: "Islam", email: "fajar@email.com", jurusan: "IPS", asalSekolah: "SMA 5 Yogyakarta", tahunLulus: 2019, jurusanYangDituju: "Ekonomi", nilaiUTBK: 680}
-	calonMahasiswa[5] = dataPendaftar{nisn: 1234567895, nama: "Hanafi Rizky", tempatLahir: "Jakarta", tanggalLahir: "1999-06-06", jenisKelamin: "Laki-laki", agama: "Islam", email: "hanafi@email.com", jurusan: "IPA", asalSekolah: "SMA 6 Jakarta", tahunLulus: 2018, jurusanYangDituju: "Fisika", nilaiUTBK: 725}
+	calonMahasiswa[5] = dataPendaftar{nisn: 1234567895, nama: "Hanafi Rizky", tempatLahir: "Jakarta", tanggalLahir: "1999-06-06", jenisKelamin: "Laki-laki", agama: "Islam", email: "hanafi@email.com", jurusan: "IPA", asalSekolah: "SMA 6 Jakarta", tahunLulus: 2018, jurusanYangDituju: "Fisika", nilaiUTBK: 1000}
 	calonMahasiswa[6] = dataPendaftar{nisn: 1234567896, nama: "Indah Purnama", tempatLahir: "Semarang", tanggalLahir: "2001-07-07", jenisKelamin: "Perempuan", agama: "Islam", email: "indah@email.com", jurusan: "IPS", asalSekolah: "SMA 7 Semarang", tahunLulus: 2019, jurusanYangDituju: "Psikologi", nilaiUTBK: 630}
 	calonMahasiswa[7] = dataPendaftar{nisn: 1234567897, nama: "Joko Susanto", tempatLahir: "Surakarta", tanggalLahir: "2000-08-08", jenisKelamin: "Laki-laki", agama: "Kristen", email: "joko@email.com", jurusan: "IPA", asalSekolah: "SMA 8 Surakarta", tahunLulus: 2019, jurusanYangDituju: "Teknik Industri", nilaiUTBK: 715}
 	calonMahasiswa[8] = dataPendaftar{nisn: 1234567898, nama: "Kartika Sari", tempatLahir: "Solo", tanggalLahir: "1999-09-09", jenisKelamin: "Perempuan", agama: "Islam", email: "kartika@email.com", jurusan: "IPA", asalSekolah: "SMA 9 Solo", tahunLulus: 2018, jurusanYangDituju: "Teknik Kimia", nilaiUTBK: 705}
@@ -65,6 +68,8 @@ func main() {
 	// calonMahasiswa[17] = dataPendaftar{nisn: 1234567907, nama: "Rudi Kurniawan", tempatLahir: "Surabaya", tanggalLahir: "2001-06-18", jenisKelamin: "Laki-laki", agama: "Kristen", email: "rudi@email.com", jurusan: "IPA", asalSekolah: "SMA 18 Surabaya", tahunLulus: 2019, jurusanYangDituju: "Bioteknologi", nilaiUTBK: 710}
 	// calonMahasiswa[18] = dataPendaftar{nisn: 1234567908, nama: "Hendri Susilo", tempatLahir: "Jakarta", tanggalLahir: "2000-07-19", jenisKelamin: "Laki-laki", agama: "Islam", email: "hendri@email.com", jurusan: "IPA", asalSekolah: "SMA 19 Jakarta", tahunLulus: 2018, jurusanYangDituju: "Teknik Komputer", nilaiUTBK: 690}
 	// calonMahasiswa[19] = dataPendaftar{nisn: 1234567909, nama: "Siti Mulyani", tempatLahir: "Semarang", tanggalLahir: "2001-08-20", jenisKelamin: "Perempuan", agama: "Hindu", email: "siti@email.com", jurusan: "IPS", asalSekolah: "SMA 20 Semarang", tahunLulus: 2019, jurusanYangDituju: "Manajemen", nilaiUTBK: 660}
+
+	status(&calonMahasiswa)
 
 	//Menampilkan data calon mahasiswa
 	/*
@@ -129,10 +134,13 @@ selesai:
 				case 2:
 					fmt.Println("Pengurutan dengan Selection Sort (Descending)")
 					selectionSortDescending(&calonMahasiswa)
+
 				case 3:
 					fmt.Println("Pengurutan dengan Insertion Sort (Ascending)")
+					insertionSort_Asc(&calonMahasiswa)
 				case 4:
 					fmt.Println("Pengurutan dengan Insertion Sort (Descending)")
+					insertionSort_Desc(&calonMahasiswa)
 				default:
 					break
 				}
@@ -176,42 +184,72 @@ selesai:
 	}
 }
 
+//Fungsi Insertion Sort ASC
+func insertionSort_Asc(calonMahasiswa *dataSiswa) {
+	// i penunjuk pertama
+	for i := 1; i < len(calonMahasiswa); i++ {
+		temp := calonMahasiswa[i]
+		// j penunjuk kedua (berada di posisi belakang i)
+		j := i
+		for j > 0 && temp.nilaiUTBK < calonMahasiswa[j-1].nilaiUTBK {
+			calonMahasiswa[j] = calonMahasiswa[j-1]
+			j--
+		}
+		calonMahasiswa[j] = temp
+		fmt.Println(" ")
+	}
+}
+
+//Fungsi Insertion Sort DESC
+func insertionSort_Desc(calonMahasiswa *dataSiswa) {
+	// i penunjuk pertama
+	for i := 1; i < len(calonMahasiswa); i++ {
+		temp := calonMahasiswa[i]
+		// j penunjuk kedua (berada di posisi belakang i)
+		j := i
+		for j > 0 && temp.nilaiUTBK > calonMahasiswa[j-1].nilaiUTBK {
+			calonMahasiswa[j] = calonMahasiswa[j-1]
+			j--
+		}
+		calonMahasiswa[j] = temp
+		fmt.Println(" ")
+	}
+}
+
+// Fungsi untuk mengurutkan data menggunakan selection sort ascending
+func selectionSortAscending(calonMahasiswa *dataSiswa) {
+	for i := 0; i < len(calonMahasiswa)-1; i++ {
+		idx_min := i
+		for j := i + 1; j < len(calonMahasiswa); j++ {
+			if calonMahasiswa[j].nilaiUTBK < calonMahasiswa[idx_min].nilaiUTBK {
+				idx_min = j
+			}
+		}
+		calonMahasiswa[i], calonMahasiswa[idx_min] = calonMahasiswa[idx_min], calonMahasiswa[i]
+	}
+}
+
+// Fungsi untuk mengurutkan data menggunakan selection sort ascending
+func selectionSortDescending(calonMahasiswa *dataSiswa) {
+	for i := 0; i < len(calonMahasiswa)-1; i++ {
+		idx_min := i
+		for j := i + 1; j < len(calonMahasiswa); j++ {
+			if calonMahasiswa[j].nilaiUTBK > calonMahasiswa[idx_min].nilaiUTBK {
+				idx_min = j
+			}
+		}
+		calonMahasiswa[i], calonMahasiswa[idx_min] = calonMahasiswa[idx_min], calonMahasiswa[i]
+	}
+}
+
 //Fungsi untuk menentukan status penerimaan
-func status(calonMahasiswa *dataSiswa) string {
-	var status string
-	for _, k := range calonMahasiswa {
+func status(calonMahasiswa *dataSiswa) {
+	for i, k := range calonMahasiswa {
 		if k.nilaiUTBK >= 600 {
-			status = "Diterima"
+			calonMahasiswa[i].status = "Diterima"
 		} else {
-			status = "Tidak Diterima"
+			calonMahasiswa[i].status = "Tidak Diterima"
 		}
-	}
-	return status
-}
-
-// Fungsi untuk mengurutkan data menggunakan selection sort ascending
-func selectionSortAscending(calonMahasiswa *dataSiswa){
-	for i := 0; i < len(calonMahasiswa)-1; i++{
-		idx_min := i
-		for j := i + 1; j < len(calonMahasiswa); j++{
-			if calonMahasiswa[j].nilaiUTBK < calonMahasiswa[idx_min].nilaiUTBK{
-				idx_min = j
-			}
-		}
-			calonMahasiswa[i], calonMahasiswa[idx_min] = calonMahasiswa[idx_min], calonMahasiswa[i]
-	}
-}
-
-// Fungsi untuk mengurutkan data menggunakan selection sort ascending
-func selectionSortDescending(calonMahasiswa *dataSiswa){
-	for i := 0; i < len(calonMahasiswa)-1; i++{
-		idx_min := i
-		for j := i + 1; j < len(calonMahasiswa); j++{
-			if calonMahasiswa[j].nilaiUTBK >calonMahasiswa[idx_min].nilaiUTBK{
-				idx_min = j
-			}
-		}
-			calonMahasiswa[i], calonMahasiswa[idx_min] = calonMahasiswa[idx_min], calonMahasiswa[i]
 	}
 }
 
@@ -243,7 +281,7 @@ func tambahData(calonMahasiswa *dataSiswa, banyakData int) {
 		fmt.Scan(&calonMahasiswa[i].jurusanYangDituju)
 		fmt.Print("Masukkan Nilai UTBK: ")
 		fmt.Scan(&calonMahasiswa[i].nilaiUTBK)
-		calonMahasiswa[i].status = status(calonMahasiswa)
+		status(calonMahasiswa)
 		fmt.Println("==========================")
 	}
 	fmt.Println("Data berhasil ditambahkan")
