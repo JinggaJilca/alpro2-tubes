@@ -133,6 +133,16 @@ func mainMenu() int {
 
 }
 
+func status(calonMahasiswa *dataSiswa){
+	for _, k := range calonMahasiswa{
+		if k.nilaiUTBK >= 600{
+			fmt.Println("Mahasiswa diterima")
+		} else {
+			fmt.Println("Mahasiswa tidak diterima")
+		}
+	}
+}
+
 // ============ *Kalau ada fitur login beb, jangan panik duluw
 /*
 func verifikasiLogin() {
