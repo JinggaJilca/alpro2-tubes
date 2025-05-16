@@ -35,21 +35,25 @@ type dataMahasigma struct {
 	jurusan string
 }
 
+const max = 20
+
+type dataSiswa = [max]dataPendaftar
+
 func main() {
-	var calonMahasiswa [20]dataPendaftar
+	var calonMahasiswa dataSiswa
 	// var mahasigma [10]dataMahasigma
 
 	//Data dummy calon mahasiswa
-	calonMahasiswa[0] = dataPendaftar{nisn: 1234567890, nama: "Andi Pratama", tempatLahir: "Surabaya", tanggalLahir: "2000-01-01", jenisKelamin: "Laki-laki", agama: "Islam", email: "andi@email.com", jurusan: "IPA", asalSekolah: "SMA 1 Surabaya", tahunLulus: 2018, jurusanYangDituju: "Teknik Informatika", nilaiUTBK: 700}
-	calonMahasiswa[1] = dataPendaftar{nisn: 1234567891, nama: "Siti Nurjanah", tempatLahir: "Malang", tanggalLahir: "2001-02-02", jenisKelamin: "Perempuan", agama: "Islam", email: "siti@email.com", jurusan: "IPS", asalSekolah: "SMA 2 Malang", tahunLulus: 2019, jurusanYangDituju: "Manajemen", nilaiUTBK: 650}
-	calonMahasiswa[2] = dataPendaftar{nisn: 1234567892, nama: "Budi Santoso", tempatLahir: "Surabaya", tanggalLahir: "2000-03-03", jenisKelamin: "Laki-laki", agama: "Kristen", email: "budi@email.com", jurusan: "IPA", asalSekolah: "SMA 3 Surabaya", tahunLulus: 2019, jurusanYangDituju: "Teknik Mesin", nilaiUTBK: 710}
-	calonMahasiswa[3] = dataPendaftar{nisn: 1234567893, nama: "Dewi Lestari", tempatLahir: "Bandung", tanggalLahir: "1999-04-04", jenisKelamin: "Perempuan", agama: "Hindu", email: "dewi@email.com", jurusan: "IPA", asalSekolah: "SMA 4 Bandung", tahunLulus: 2018, jurusanYangDituju: "Teknik Elektro", nilaiUTBK: 720}
-	calonMahasiswa[4] = dataPendaftar{nisn: 1234567894, nama: "Fajar Ramadhan", tempatLahir: "Yogyakarta", tanggalLahir: "2000-05-05", jenisKelamin: "Laki-laki", agama: "Islam", email: "fajar@email.com", jurusan: "IPS", asalSekolah: "SMA 5 Yogyakarta", tahunLulus: 2019, jurusanYangDituju: "Ekonomi", nilaiUTBK: 680}
-	calonMahasiswa[5] = dataPendaftar{nisn: 1234567895, nama: "Hanafi Rizky", tempatLahir: "Jakarta", tanggalLahir: "1999-06-06", jenisKelamin: "Laki-laki", agama: "Islam", email: "hanafi@email.com", jurusan: "IPA", asalSekolah: "SMA 6 Jakarta", tahunLulus: 2018, jurusanYangDituju: "Fisika", nilaiUTBK: 725}
-	calonMahasiswa[6] = dataPendaftar{nisn: 1234567896, nama: "Indah Purnama", tempatLahir: "Semarang", tanggalLahir: "2001-07-07", jenisKelamin: "Perempuan", agama: "Islam", email: "indah@email.com", jurusan: "IPS", asalSekolah: "SMA 7 Semarang", tahunLulus: 2019, jurusanYangDituju: "Psikologi", nilaiUTBK: 630}
-	calonMahasiswa[7] = dataPendaftar{nisn: 1234567897, nama: "Joko Susanto", tempatLahir: "Surakarta", tanggalLahir: "2000-08-08", jenisKelamin: "Laki-laki", agama: "Kristen", email: "joko@email.com", jurusan: "IPA", asalSekolah: "SMA 8 Surakarta", tahunLulus: 2019, jurusanYangDituju: "Teknik Industri", nilaiUTBK: 715}
-	calonMahasiswa[8] = dataPendaftar{nisn: 1234567898, nama: "Kartika Sari", tempatLahir: "Solo", tanggalLahir: "1999-09-09", jenisKelamin: "Perempuan", agama: "Islam", email: "kartika@email.com", jurusan: "IPA", asalSekolah: "SMA 9 Solo", tahunLulus: 2018, jurusanYangDituju: "Teknik Kimia", nilaiUTBK: 705}
-	calonMahasiswa[9] = dataPendaftar{nisn: 1234567899, nama: "Lutfi Fauzi", tempatLahir: "Surabaya", tanggalLahir: "2001-10-10", jenisKelamin: "Laki-laki", agama: "Islam", email: "lutfi@email.com", jurusan: "IPS", asalSekolah: "SMA 10 Surabaya", tahunLulus: 2019, jurusanYangDituju: "Ilmu Komunikasi", nilaiUTBK: 690}
+	// calonMahasiswa[0] = dataPendaftar{nisn: 1234567890, nama: "Andi Pratama", tempatLahir: "Surabaya", tanggalLahir: "2000-01-01", jenisKelamin: "Laki-laki", agama: "Islam", email: "andi@email.com", jurusan: "IPA", asalSekolah: "SMA 1 Surabaya", tahunLulus: 2018, jurusanYangDituju: "Teknik Informatika", nilaiUTBK: 700}
+	// calonMahasiswa[1] = dataPendaftar{nisn: 1234567891, nama: "Siti Nurjanah", tempatLahir: "Malang", tanggalLahir: "2001-02-02", jenisKelamin: "Perempuan", agama: "Islam", email: "siti@email.com", jurusan: "IPS", asalSekolah: "SMA 2 Malang", tahunLulus: 2019, jurusanYangDituju: "Manajemen", nilaiUTBK: 650}
+	// calonMahasiswa[2] = dataPendaftar{nisn: 1234567892, nama: "Budi Santoso", tempatLahir: "Surabaya", tanggalLahir: "2000-03-03", jenisKelamin: "Laki-laki", agama: "Kristen", email: "budi@email.com", jurusan: "IPA", asalSekolah: "SMA 3 Surabaya", tahunLulus: 2019, jurusanYangDituju: "Teknik Mesin", nilaiUTBK: 710}
+	// calonMahasiswa[3] = dataPendaftar{nisn: 1234567893, nama: "Dewi Lestari", tempatLahir: "Bandung", tanggalLahir: "1999-04-04", jenisKelamin: "Perempuan", agama: "Hindu", email: "dewi@email.com", jurusan: "IPA", asalSekolah: "SMA 4 Bandung", tahunLulus: 2018, jurusanYangDituju: "Teknik Elektro", nilaiUTBK: 720}
+	// calonMahasiswa[4] = dataPendaftar{nisn: 1234567894, nama: "Fajar Ramadhan", tempatLahir: "Yogyakarta", tanggalLahir: "2000-05-05", jenisKelamin: "Laki-laki", agama: "Islam", email: "fajar@email.com", jurusan: "IPS", asalSekolah: "SMA 5 Yogyakarta", tahunLulus: 2019, jurusanYangDituju: "Ekonomi", nilaiUTBK: 680}
+	// calonMahasiswa[5] = dataPendaftar{nisn: 1234567895, nama: "Hanafi Rizky", tempatLahir: "Jakarta", tanggalLahir: "1999-06-06", jenisKelamin: "Laki-laki", agama: "Islam", email: "hanafi@email.com", jurusan: "IPA", asalSekolah: "SMA 6 Jakarta", tahunLulus: 2018, jurusanYangDituju: "Fisika", nilaiUTBK: 725}
+	// calonMahasiswa[6] = dataPendaftar{nisn: 1234567896, nama: "Indah Purnama", tempatLahir: "Semarang", tanggalLahir: "2001-07-07", jenisKelamin: "Perempuan", agama: "Islam", email: "indah@email.com", jurusan: "IPS", asalSekolah: "SMA 7 Semarang", tahunLulus: 2019, jurusanYangDituju: "Psikologi", nilaiUTBK: 630}
+	// calonMahasiswa[7] = dataPendaftar{nisn: 1234567897, nama: "Joko Susanto", tempatLahir: "Surakarta", tanggalLahir: "2000-08-08", jenisKelamin: "Laki-laki", agama: "Kristen", email: "joko@email.com", jurusan: "IPA", asalSekolah: "SMA 8 Surakarta", tahunLulus: 2019, jurusanYangDituju: "Teknik Industri", nilaiUTBK: 715}
+	// calonMahasiswa[8] = dataPendaftar{nisn: 1234567898, nama: "Kartika Sari", tempatLahir: "Solo", tanggalLahir: "1999-09-09", jenisKelamin: "Perempuan", agama: "Islam", email: "kartika@email.com", jurusan: "IPA", asalSekolah: "SMA 9 Solo", tahunLulus: 2018, jurusanYangDituju: "Teknik Kimia", nilaiUTBK: 705}
+	// calonMahasiswa[9] = dataPendaftar{nisn: 1234567899, nama: "Lutfi Fauzi", tempatLahir: "Surabaya", tanggalLahir: "2001-10-10", jenisKelamin: "Laki-laki", agama: "Islam", email: "lutfi@email.com", jurusan: "IPS", asalSekolah: "SMA 10 Surabaya", tahunLulus: 2019, jurusanYangDituju: "Ilmu Komunikasi", nilaiUTBK: 690}
 
 	// calonMahasiswa[10] = dataPendaftar{nisn: 1234567900, nama: "Rina Marlina", tempatLahir: "Medan", tanggalLahir: "2001-11-11", jenisKelamin: "Perempuan", agama: "Kristen", email: "rina@email.com", jurusan: "IPA", asalSekolah: "SMA 11 Medan", tahunLulus: 2019, jurusanYangDituju: "Biologi", nilaiUTBK: 680}
 	// calonMahasiswa[11] = dataPendaftar{nisn: 1234567901, nama: "Toni Suryadi", tempatLahir: "Jakarta", tanggalLahir: "1999-12-12", jenisKelamin: "Laki-laki", agama: "Islam", email: "toni@email.com", jurusan: "IPS", asalSekolah: "SMA 12 Jakarta", tahunLulus: 2018, jurusanYangDituju: "Sosiologi", nilaiUTBK: 675}
@@ -105,9 +109,29 @@ func main() {
 
 	case 2:
 		fmt.Println("Urutkan data bedasarkan kategori")
-		//Penguruan dengan selection sort dan insertion sort harus bisa menaik (ascending) atau menurun (descending)
+		//Pengurutan dengan selection sort dan insertion sort harus bisa menaik (ascending) atau menurun (descending)
 	case 3:
 		fmt.Println("Tambah data")
+		var banyakData int
+		fmt.Print("Masukkan banyak data yang akan ditambahkan: ")
+		fmt.Scan(&banyakData)
+		tambahData(&calonMahasiswa, banyakData)
+		// for i := 0; i < banyakData; i++ {
+		// 	fmt.Println(i+1, ". NISN: ", calonMahasiswa[i].nisn)
+		// 	fmt.Println("Nama: ", calonMahasiswa[i].nama)
+		// 	fmt.Println("Tempat Lahir: ", calonMahasiswa[i].tempatLahir)
+		// 	fmt.Println("Tanggal Lahir: ", calonMahasiswa[i].tanggalLahir)
+		// 	fmt.Println("Jenis Kelamin: ", calonMahasiswa[i].jenisKelamin)
+		// 	fmt.Println("Agama: ", calonMahasiswa[i].agama)
+		// 	fmt.Println("Email: ", calonMahasiswa[i].email)
+		// 	fmt.Println("Jurusan: ", calonMahasiswa[i].jurusan)
+		// 	fmt.Println("Asal Sekolah: ", calonMahasiswa[i].asalSekolah)
+		// 	fmt.Println("Tahun Lulus: ", calonMahasiswa[i].tahunLulus)
+		// 	fmt.Println("Jurusan yang Dituju: ", calonMahasiswa[i].jurusanYangDituju)
+		// 	fmt.Println("Nilai UTBK: ", calonMahasiswa[i].nilaiUTBK)
+		// 	fmt.Println("Status: ", calonMahasiswa[i].status)
+		// 	fmt.Println()
+		}
 	case 4:
 		//Melakukan pencarian data dengan sequential search dan binary search
 		fmt.Println("Ubah data")
@@ -118,6 +142,55 @@ func main() {
 	}
 
 }
+
+//Fungsi untuk menentukan status penerimaan
+func status(calonMahasiswa *dataSiswa) string {
+	var status string
+	for _, k := range calonMahasiswa {
+		if k.nilaiUTBK >= 600 {
+			status = "Diterima"
+		} else {
+			status = "Tidak Diterima"
+		}
+	}
+	return status
+}
+
+//Fungsi untuk menambah data
+func tambahData(calonMahasiswa *dataSiswa, banyakData int) {
+
+	for i := 0; i < banyakData; i++ {
+		fmt.Print("Masukkan NISN: ")
+		fmt.Scan(&calonMahasiswa[i].nisn)
+		fmt.Print("Masukkan Nama: ")
+		fmt.Scan(&calonMahasiswa[i].nama)
+		fmt.Print("Masukkan Tempat Lahir: ")
+		fmt.Scan(&calonMahasiswa[i].tempatLahir)
+		fmt.Print("Masukkan Tanggal Lahir: ")
+		fmt.Scan(&calonMahasiswa[i].tanggalLahir)
+		fmt.Print("Masukkan Jenis Kelamin: ")
+		fmt.Scan(&calonMahasiswa[i].jenisKelamin)
+		fmt.Print("Masukkan Agama: ")
+		fmt.Scan(&calonMahasiswa[i].agama)
+		fmt.Print("Masukkan Email: ")
+		fmt.Scan(&calonMahasiswa[i].email)
+		fmt.Print("Masukkan Jurusan: ")
+		fmt.Scan(&calonMahasiswa[i].jurusan)
+		fmt.Print("Masukkan Asal Sekolah: ")
+		fmt.Scan(&calonMahasiswa[i].asalSekolah)
+		fmt.Print("Masukkan Tahun Lulus: ")
+		fmt.Scan(&calonMahasiswa[i].tahunLulus)
+		fmt.Print("Masukkan Jurusan yang Dituju: ")
+		fmt.Scan(&calonMahasiswa[i].jurusanYangDituju)
+		fmt.Print("Masukkan Nilai UTBK: ")
+		fmt.Scan(&calonMahasiswa[i].nilaiUTBK)
+		calonMahasiswa[i].status = status(calonMahasiswa)
+		fmt.Println("==========================")
+	}
+	fmt.Println("Data berhasil ditambahkan")
+}
+
+//Prosedur untuk menampilkan menu utama
 func mainMenu() int {
 	var pilihan int
 	fmt.Println("======= MENU UTAMA =======")
@@ -131,16 +204,6 @@ func mainMenu() int {
 	fmt.Scanln(&pilihan)
 	return pilihan
 
-}
-
-func status(calonMahasiswa *dataSiswa){
-	for _, k := range calonMahasiswa{
-		if k.nilaiUTBK >= 600{
-			fmt.Println("Mahasiswa diterima")
-		} else {
-			fmt.Println("Mahasiswa tidak diterima")
-		}
-	}
 }
 
 // ============ *Kalau ada fitur login beb, jangan panik duluw
