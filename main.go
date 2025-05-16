@@ -1,9 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-/* SISTEM PENERIMAAN MAHASISWA BUKIT DURI
-Sistem bedasarkan seleksi nilai UTBK apabila nilai lebih dari 600 maka diterima
+/*
+	SISTEM PENERIMAAN MAHASISWA BUKIT DURI
+
+# Sistem bedasarkan seleksi nilai UTBK apabila nilai lebih dari 600 maka diterima
 
 ======== SPESIFIKASI UMUM
 ✅ Program harus dibuat secara modular dengan menggunakan subprogram.
@@ -69,56 +73,23 @@ func main() {
 	// calonMahasiswa[18] = dataPendaftar{nisn: 1234567908, nama: "Hendri Susilo", tempatLahir: "Jakarta", tanggalLahir: "2000-07-19", jenisKelamin: "Laki-laki", agama: "Islam", email: "hendri@email.com", jurusan: "IPA", asalSekolah: "SMA 19 Jakarta", tahunLulus: 2018, jurusanYangDituju: "Teknik Komputer", nilaiUTBK: 690}
 	// calonMahasiswa[19] = dataPendaftar{nisn: 1234567909, nama: "Siti Mulyani", tempatLahir: "Semarang", tanggalLahir: "2001-08-20", jenisKelamin: "Perempuan", agama: "Hindu", email: "siti@email.com", jurusan: "IPS", asalSekolah: "SMA 20 Semarang", tahunLulus: 2019, jurusanYangDituju: "Manajemen", nilaiUTBK: 660}
 
-	status(&calonMahasiswa)
+	status(&calonMahasiswa) //Hapus jika menggunakan input manual
 
-	//Menampilkan data calon mahasiswa
-	/*
-		for i, p := range calonMahasiswa {
-			fmt.Println(i+1, ". NISN: ", p.nisn)
-			fmt.Println("Nama: ", p.nama)
-			fmt.Println("Tempat Lahir: ", p.tempatLahir)
-			fmt.Println("Tanggal Lahir: ", p.tanggalLahir)
-			fmt.Println("Jenis Kelamin: ", p.jenisKelamin)
-			fmt.Println("Agama: ", p.agama)
-			fmt.Println("Email: ", p.email)
-			fmt.Println("Jurusan: ", p.jurusan)
-			fmt.Println("Asal Sekolah: ", p.asalSekolah)
-			fmt.Println("Tahun Lulus: ", p.tahunLulus)
-			fmt.Println("Jurusan yang Dituju: ", p.jurusanYangDituju)
-			fmt.Println("Nilai UTBK: ", p.nilaiUTBK)
-			fmt.Println("Status: ", p.status)
-			fmt.Println()
-		}
-	*/
-	fmt.Println("======= SELAMAT DATANG ADMIN =======")
+	fmt.Println("🏫 SELAMAT DATANG 🏫")
 	fmt.Println("Penerimaan Mahasiswa Bukit Duri")
 selesai:
 	for {
 		input := mainMenu()
 		switch input {
 		case 1:
-			fmt.Println("Menampilkan semua data")
-			for i, p := range calonMahasiswa {
-				fmt.Println(i+1, ". NISN: ", p.nisn)
-				fmt.Println("Nama: ", p.nama)
-				fmt.Println("Tempat Lahir: ", p.tempatLahir)
-				fmt.Println("Tanggal Lahir: ", p.tanggalLahir)
-				fmt.Println("Jenis Kelamin: ", p.jenisKelamin)
-				fmt.Println("Agama: ", p.agama)
-				fmt.Println("Email: ", p.email)
-				fmt.Println("Jurusan: ", p.jurusan)
-				fmt.Println("Asal Sekolah: ", p.asalSekolah)
-				fmt.Println("Tahun Lulus: ", p.tahunLulus)
-				fmt.Println("Jurusan yang Dituju: ", p.jurusanYangDituju)
-				fmt.Println("Nilai UTBK: ", p.nilaiUTBK)
-				fmt.Println("Status: ", p.status)
-				fmt.Println()
-			}
+			fmt.Println("------- Tampilkan semua data -------")
+			tampilkanIsi(calonMahasiswa)
 
 		case 2:
+			fmt.Println("------- Urutkan Data -------")
 			for {
 				var metode int
-				fmt.Println("Urutkan data berdasarkan nilai UTBK")
+				fmt.Println("Pilh metode pengurutan:")
 				fmt.Println("1. Selection Sort (Ascending)")
 				fmt.Println("2. Selection Sort (Descending)")
 				fmt.Println("3. Insertion Sort (Ascending)")
@@ -150,7 +121,7 @@ selesai:
 			}
 
 		case 3:
-			fmt.Println("Tambah data")
+			fmt.Println("------- Tambah data -------")
 			var banyakData int
 			fmt.Print("Masukkan banyak data yang akan ditambahkan: ")
 			fmt.Scan(&banyakData)
@@ -174,17 +145,117 @@ selesai:
 			}
 		case 4:
 			//Melakukan pencarian data dengan sequential search dan binary search
-			fmt.Println("Ubah data")
+			fmt.Println("------- Cari Data -------")
+			var cariNISN int
+		menuCari:
+			for {
+				var metode int
+				fmt.Println("Pilih metode pencarian:")
+				fmt.Println("1. Sequential Search")
+				fmt.Println("2. Binary Search")
+				fmt.Println("3. Kembali")
+				fmt.Print("Pilih metode pengurutan: ")
+				fmt.Scan(&metode)
+				switch metode {
+				case 1:
+					fmt.Println("Pencarian dengan Sequential Search")
+					fmt.Print("Masukkan NISN yang dicari: ")
+					fmt.Scan(&cariNISN)
+					//fungsi taruh sini
+
+					switch menuEditable() {
+					case 1:
+						//Ubah
+					case 2:
+						//Hapus
+					case 3:
+						break menuCari
+					default:
+						break
+					}
+				case 2:
+					fmt.Println("Pencarian dengan Binary Search")
+					fmt.Println("Melakukan pengurutan ASC NISN calonMahasiswa....")
+					//Urutkan data
+					urutkanNISN(&calonMahasiswa)
+					//Tampilkan hasi pengurutan
+					tampilkanIsi(calonMahasiswa)
+					//Input NISN
+					fmt.Print("Masukkan NISN yang dicari: ")
+					fmt.Scan(&cariNISN)
+					switch menuEditable() {
+					case 1:
+						//Ubah
+					case 2:
+						//Hapus
+					case 3:
+						break menuCari
+					default:
+						break
+					}
+
+				default:
+					break
+				}
+				if metode == 3 {
+					break
+				}
+			}
+
 		case 5:
-			fmt.Println("Hapus data")
-		case 6:
 			fmt.Println("Terima kasih telah menggunakan sistem ini")
 			break selesai
 		}
 	}
 }
 
-//Fungsi Insertion Sort ASC
+// Fungsi mengurutkan ASC bedasarkan NISN
+func urutkanNISN(calonMahasiswa *dataSiswa) {
+	for i := 1; i < len(calonMahasiswa); i++ {
+		temp := calonMahasiswa[i]
+		// j penunjuk kedua (berada di posisi belakang i)
+		j := i
+		for j > 0 && float64(temp.nisn) < float64(calonMahasiswa[j-1].nisn) {
+			calonMahasiswa[j] = calonMahasiswa[j-1]
+			j--
+		}
+		calonMahasiswa[j] = temp
+	}
+}
+
+// Fungsi menampilkan semua isi array
+func tampilkanIsi(calonMahasiswa dataSiswa) {
+	for i, p := range calonMahasiswa {
+		fmt.Println(i+1, ". NISN: ", p.nisn)
+		fmt.Println("Nama: ", p.nama)
+		fmt.Println("Tempat Lahir: ", p.tempatLahir)
+		fmt.Println("Tanggal Lahir: ", p.tanggalLahir)
+		fmt.Println("Jenis Kelamin: ", p.jenisKelamin)
+		fmt.Println("Agama: ", p.agama)
+		fmt.Println("Email: ", p.email)
+		fmt.Println("Jurusan: ", p.jurusan)
+		fmt.Println("Asal Sekolah: ", p.asalSekolah)
+		fmt.Println("Tahun Lulus: ", p.tahunLulus)
+		fmt.Println("Jurusan yang Dituju: ", p.jurusanYangDituju)
+		fmt.Println("Nilai UTBK: ", p.nilaiUTBK)
+		fmt.Println("Status: ", p.status)
+		fmt.Println()
+	}
+}
+
+// Fungsi untuk menu ubah dan hapus
+func menuEditable() int {
+	var aksi int
+	fmt.Println("-------------")
+	fmt.Println("1. Ubah Data")
+	fmt.Println("2. Hapus Data")
+	fmt.Println("3. Kembali ke menu utama")
+	fmt.Print("Aksi: ")
+	fmt.Scan(&aksi)
+	return aksi
+}
+
+// Fungsi Insertion Sort ASC
 func insertionSort_Asc(calonMahasiswa *dataSiswa) {
 	// i penunjuk pertama
 	for i := 1; i < len(calonMahasiswa); i++ {
@@ -196,11 +267,10 @@ func insertionSort_Asc(calonMahasiswa *dataSiswa) {
 			j--
 		}
 		calonMahasiswa[j] = temp
-		fmt.Println(" ")
 	}
 }
 
-//Fungsi Insertion Sort DESC
+// Fungsi Insertion Sort DESC
 func insertionSort_Desc(calonMahasiswa *dataSiswa) {
 	// i penunjuk pertama
 	for i := 1; i < len(calonMahasiswa); i++ {
@@ -212,7 +282,6 @@ func insertionSort_Desc(calonMahasiswa *dataSiswa) {
 			j--
 		}
 		calonMahasiswa[j] = temp
-		fmt.Println(" ")
 	}
 }
 
@@ -242,7 +311,7 @@ func selectionSortDescending(calonMahasiswa *dataSiswa) {
 	}
 }
 
-//Fungsi untuk menentukan status penerimaan
+// Fungsi untuk menentukan status penerimaan
 func status(calonMahasiswa *dataSiswa) {
 	for i, k := range calonMahasiswa {
 		if k.nilaiUTBK >= 600 {
@@ -253,7 +322,7 @@ func status(calonMahasiswa *dataSiswa) {
 	}
 }
 
-//Fungsi untuk menambah data
+// Fungsi untuk menambah data
 func tambahData(calonMahasiswa *dataSiswa, banyakData int) {
 
 	for i := 0; i < banyakData; i++ {
@@ -282,21 +351,20 @@ func tambahData(calonMahasiswa *dataSiswa, banyakData int) {
 		fmt.Print("Masukkan Nilai UTBK: ")
 		fmt.Scan(&calonMahasiswa[i].nilaiUTBK)
 		status(calonMahasiswa)
-		fmt.Println("==========================")
+		fmt.Println()
 	}
-	fmt.Println("Data berhasil ditambahkan")
+	fmt.Println("✅ Data berhasil ditambahkan")
 }
 
-//Prosedur untuk menampilkan menu utama
+// Prosedur untuk menampilkan menu utama
 func mainMenu() int {
 	var pilihan int
-	fmt.Println("======= MENU UTAMA =======")
+	fmt.Println("-------- MENU UTAMA --------")
 	fmt.Println("1. Tampilkan Semua Data")
-	fmt.Println("2. Urutkan Data Sesuai kategori")
+	fmt.Println("2. Urutkan Data")
 	fmt.Println("3. Tambah Data")
-	fmt.Println("4. Ubah Data")
-	fmt.Println("5. Hapus Data")
-	fmt.Println("6. Keluar")
+	fmt.Println("4. Cari Data")
+	fmt.Println("5. Keluar")
 	fmt.Print("Pilih menu: ")
 	fmt.Scan(&pilihan)
 	return pilihan
