@@ -161,36 +161,13 @@ selesai:
 					fmt.Println("Pencarian dengan Sequential Search")
 					fmt.Print("Masukkan NISN yang dicari: ")
 					fmt.Scan(&cariNISN)
-					
-					sequentialSearch(calonMahasiswa, &cariNISN)
+					//fungsi taruh sini
 
 					switch menuEditable() {
 					case 1:
-						//ubah
-						var ubahNISN int
-						var newNISN int
-
-						fmt.Print("Masukkan NISN yang ingin di ubah: ")
-						fmt.Scan(&ubahNISN)
-						if ubahNISN >= 0 && ubahNISN < len(calonMahasiswa) {
-							fmt.Print("Masukkan NISN yang baru: ")
-							fmt.Scan(&newNISN)
-							newNISN = calonMahasiswa[ubahNISN].nisn
-							fmt.Print("NISN berhasil diubah!")
-						} else {
-							fmt.Print("NISN tidak ditemukan")
-						}
+						//Ubah
 					case 2:
-						// hapus
-						var ubahNISN int
-						fmt.Print("Masukkan NISN yang ingin di hapus: ")
-						fmt.Scan(&ubahNISN)
-						if ubahNISN >=0 && ubahNISN < len(calonMahasiswa){
-							calonMahasiswa = append(calonMahasiswa[:ubahNISN], calonMahasiswa[ubahNISN+1:]...)
-							fmt.Print("NISN berhasil dihapus!")
-						} else {
-							fmt.Print("NISN tidak ditemukan")
-						}
+						//Hapus
 					case 3:
 						break menuCari
 					default:
@@ -226,7 +203,7 @@ selesai:
 			}
 
 		case 5:
-			fmt.Println("Terima kasih telah menggunakan sistem ini")
+			fmt.Println("Terima kasih telah menggunakan fitur ini")
 			break selesai
 		}
 	}
@@ -277,20 +254,6 @@ func menuEditable() int {
 	fmt.Scan(&aksi)
 	return aksi
 }
-
-// fungsi sequential search NIS
-func sequentialSearch(calonMahasiswa dataSiswa, *cariNISN int) int{
-	var found int = -1
-	var j int = 0
-
-	for j < n && found == -1{
-		if calonMahasiswa[j].nisn == cariNISN {
-			found = j
-		}
-	j = j + 1
-	}
-	return found
-} 
 
 // Fungsi Insertion Sort ASC
 func insertionSort_Asc(calonMahasiswa *dataSiswa) {
