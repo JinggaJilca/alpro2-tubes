@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 )
 
 /*
@@ -158,14 +161,15 @@ selesai:
 				fmt.Scan(&metode)
 				switch metode {
 				case 1:
-					fmt.Println("Pencarian dengan Sequential Search")
+					fmt.Println("📊 Pencarian dengan Sequential Search 📊")
 					fmt.Print("Masukkan NISN yang dicari: ")
 					fmt.Scan(&cariNISN)
-					//fungsi taruh sini
+					sequentianSearchNISN(&calonMahasiswa, cariNISN)
 
 					switch menuEditable() {
 					case 1:
-						//Ubah
+						// Ubah
+						ubahDataCalon(&calonMahasiswa, cariNISN)
 					case 2:
 						//Hapus
 					case 3:
@@ -186,6 +190,7 @@ selesai:
 					switch menuEditable() {
 					case 1:
 						//Ubah
+						ubahDataCalon(&calonMahasiswa, cariNISN)
 					case 2:
 						//Hapus
 					case 3:
@@ -240,6 +245,137 @@ func tampilkanIsi(calonMahasiswa dataSiswa) {
 		fmt.Println("Nilai UTBK: ", p.nilaiUTBK)
 		fmt.Println("Status: ", p.status)
 		fmt.Println()
+	}
+}
+
+func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
+	var gantiData int
+	fmt.Println("-------------------------------------")
+	fmt.Println("Pilih data apa yang ingin di ubah")
+	fmt.Println("1. Nama")
+	fmt.Println("2. Tempat Lahir")
+	fmt.Println("3. Tanggal Lahir")
+	fmt.Println("4. Jenis Kelamin")
+	fmt.Println("5. Agama")
+	fmt.Println("6. Email")
+	fmt.Println("7. Jurusan")
+	fmt.Println("8. Asal Sekolah")
+	fmt.Println("9. Tahun Lulus")
+	fmt.Println("10. Jurusan yang Dituju")
+	fmt.Print("Masukkan data yang ingin diganti: ")
+	fmt.Scan(&gantiData)
+
+	for i := 0; i < len(calonMahasiswa); i++ {
+		if calonMahasiswa[i].nisn == cariNISN {
+			switch gantiData {
+			case 1:
+				fmt.Print("Masukkan nama baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputNamaBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].nama = strings.TrimSpace(inputNamaBaru)
+				fmt.Println("🎉 Nama berhasil diganti 🎉")
+				fmt.Println("---------------------------------")
+			case 2:
+				fmt.Print("Masukkan tempat lahir baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputTempatLahirBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].tempatLahir = strings.TrimSpace(inputTempatLahirBaru)
+				fmt.Println("🎉 Tempat lahir berhasil diganti 🎉")
+				fmt.Println("-----------------------------------------")
+			case 3:
+				fmt.Print("Masukkan tanggal lahir baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputTanggalLahirBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].tanggalLahir = strings.TrimSpace(inputTanggalLahirBaru)
+				fmt.Println("🎉 Tanggal lahir berhasil diganti 🎉")
+				fmt.Println("------------------------------------------")
+			case 4:
+				fmt.Print("Masukkan jenis kelamin baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputJenisKelaminBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].jenisKelamin = strings.TrimSpace(inputJenisKelaminBaru)
+				fmt.Println("🎉 Jenis Kelamin berhasil diganti 🎉")
+				fmt.Println("-------------------------------------------")
+			case 5:
+				fmt.Print("Masukkan agama baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputAgamaBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].agama = strings.TrimSpace(inputAgamaBaru)
+				fmt.Println("🎉 Agama berhasil diganti 🎉")
+				fmt.Println("----------------------------------")
+			case 6:
+				fmt.Print("Masukkan email baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputEmailBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].email = strings.TrimSpace(inputEmailBaru)
+				fmt.Println("🎉 Email berhasil diganti 🎉")
+				fmt.Println("----------------------------------")
+			case 7:
+				fmt.Print("Masukkan jurusan baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputJurusanBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].jurusan = strings.TrimSpace(inputJurusanBaru)
+				fmt.Println("🎉 Jurusan berhasil diganti 🎉")
+				fmt.Println("-----------------------------------")
+			case 8:
+				fmt.Print("Masukkan asal sekolah baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputAsalSekolahBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].asalSekolah = strings.TrimSpace(inputAsalSekolahBaru)
+				fmt.Println("🎉 Asal Sekolah berhasil diganti 🎉")
+				fmt.Println("-----------------------------------------")
+			case 9:
+				fmt.Print("Masukkan tahun lulus baru: ")
+				fmt.Scan(&calonMahasiswa[i].tahunLulus)
+				fmt.Println("🎉 Tahun Lulus berhasil diganti 🎉")
+				fmt.Println("----------------------------------------")
+			case 10:
+				fmt.Print("Masukkan jurusan yang dituju baru: ")
+				reader := bufio.NewReader(os.Stdin)
+				reader.ReadString('\n')
+				inputJurusanYangDitujuBaru, _ := reader.ReadString('\n')
+				calonMahasiswa[i].jurusanYangDituju = strings.TrimSpace(inputJurusanYangDitujuBaru)
+				fmt.Println("🎉 Jurusan yang dituju berhasil diganti 🎉")
+				fmt.Println("------------------------------------------------")
+			}
+		}
+	}
+}
+
+// Fungsi untuk pencarian (sequential search)
+func sequentianSearchNISN(calonMahasiswa *dataSiswa, cariNISN int) {
+	found := false
+	for _, j := range calonMahasiswa {
+		if j.nisn == cariNISN {
+			fmt.Printf("🕵️  Ditemukan Data Calon Mahasiswa dengan NISN %d 🕵️\n", cariNISN)
+			fmt.Println("NISN: ", j.nisn)
+			fmt.Println("Nama: ", j.nama)
+			fmt.Println("Tempat Lahir: ", j.tempatLahir)
+			fmt.Println("Tanggal Lahir: ", j.tanggalLahir)
+			fmt.Println("Jenis Kelamin: ", j.jenisKelamin)
+			fmt.Println("Agama: ", j.agama)
+			fmt.Println("Email: ", j.email)
+			fmt.Println("Jurusan: ", j.jurusan)
+			fmt.Println("Asal Sekolah: ", j.asalSekolah)
+			fmt.Println("Tahun Lulus: ", j.tahunLulus)
+			fmt.Println("Jurusan yang Dituju: ", j.jurusanYangDituju)
+			fmt.Println("Nilai UTBK: ", j.nilaiUTBK)
+			fmt.Println("Status: ", j.status)
+			found = true
+			break
+		}
+		if !found {
+			fmt.Printf("🧐  Tidak ditemukan data untuk calon mahasiswa dengan NISN %d 🧐\n", cariNISN)
+			break
+		}
 	}
 }
 
