@@ -164,7 +164,11 @@ selesai:
 					fmt.Println("📊 Pencarian dengan Sequential Search 📊")
 					fmt.Print("Masukkan NISN yang dicari: ")
 					fmt.Scan(&cariNISN)
-					sequentianSearchNISN(&calonMahasiswa, cariNISN)
+					hasil := sequentialSearchNISN(&calonMahasiswa, cariNISN)
+
+					if hasil == -1 {
+						fmt.Printf("🧐  Tidak ditemukan data untuk calon mahasiswa dengan NISN %d 🧐\n", cariNISN)
+					}
 
 					switch menuEditable() {
 					case 1:
@@ -248,6 +252,7 @@ func tampilkanIsi(calonMahasiswa dataSiswa) {
 	}
 }
 
+// Fungsi untuk mengubah data mahasiswa
 func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 	var gantiData int
 	fmt.Println("-------------------------------------")
@@ -351,8 +356,8 @@ func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 }
 
 // Fungsi untuk pencarian (sequential search)
-func sequentianSearchNISN(calonMahasiswa *dataSiswa, cariNISN int) int {
-	found := false
+func sequentialSearchNISN(calonMahasiswa *dataSiswa, cariNISN int) int {
+	hasil := -1
 	for i := 0; i < len(calonMahasiswa); i++ {
 		if calonMahasiswa[i].nisn == cariNISN {
 			fmt.Printf("🕵️  Ditemukan Data Calon Mahasiswa dengan NISN %d 🕵️\n", cariNISN)
@@ -369,14 +374,11 @@ func sequentianSearchNISN(calonMahasiswa *dataSiswa, cariNISN int) int {
 			fmt.Println("Jurusan yang Dituju: ", calonMahasiswa[i].jurusanYangDituju)
 			fmt.Println("Nilai UTBK: ", calonMahasiswa[i].nilaiUTBK)
 			fmt.Println("Status: ", calonMahasiswa[i].status)
-			return 1
+			hasil = calonMahasiswa[i].nisn
 		}
-		if !found {
-			fmt.Printf("🧐  Tidak ditemukan data untuk calon mahasiswa dengan NISN %d 🧐\n", cariNISN)
-			break
-		}
+
 	}
-	return -1
+	return hasil
 }
 
 // Fungsi untuk menu ubah dan hapus
