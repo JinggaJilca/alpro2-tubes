@@ -351,32 +351,32 @@ func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 }
 
 // Fungsi untuk pencarian (sequential search)
-func sequentianSearchNISN(calonMahasiswa *dataSiswa, cariNISN int) {
+func sequentianSearchNISN(calonMahasiswa *dataSiswa, cariNISN int) int {
 	found := false
-	for _, j := range calonMahasiswa {
-		if j.nisn == cariNISN {
+	for i := 0; i < len(calonMahasiswa); i++ {
+		if calonMahasiswa[i].nisn == cariNISN {
 			fmt.Printf("🕵️  Ditemukan Data Calon Mahasiswa dengan NISN %d 🕵️\n", cariNISN)
-			fmt.Println("NISN: ", j.nisn)
-			fmt.Println("Nama: ", j.nama)
-			fmt.Println("Tempat Lahir: ", j.tempatLahir)
-			fmt.Println("Tanggal Lahir: ", j.tanggalLahir)
-			fmt.Println("Jenis Kelamin: ", j.jenisKelamin)
-			fmt.Println("Agama: ", j.agama)
-			fmt.Println("Email: ", j.email)
-			fmt.Println("Jurusan: ", j.jurusan)
-			fmt.Println("Asal Sekolah: ", j.asalSekolah)
-			fmt.Println("Tahun Lulus: ", j.tahunLulus)
-			fmt.Println("Jurusan yang Dituju: ", j.jurusanYangDituju)
-			fmt.Println("Nilai UTBK: ", j.nilaiUTBK)
-			fmt.Println("Status: ", j.status)
-			found = true
-			break
+			fmt.Println("NISN: ", calonMahasiswa[i].nisn)
+			fmt.Println("Nama: ", calonMahasiswa[i].nama)
+			fmt.Println("Tempat Lahir: ", calonMahasiswa[i].tempatLahir)
+			fmt.Println("Tanggal Lahir: ", calonMahasiswa[i].tanggalLahir)
+			fmt.Println("Jenis Kelamin: ", calonMahasiswa[i].jenisKelamin)
+			fmt.Println("Agama: ", calonMahasiswa[i].agama)
+			fmt.Println("Email: ", calonMahasiswa[i].email)
+			fmt.Println("Jurusan: ", calonMahasiswa[i].jurusan)
+			fmt.Println("Asal Sekolah: ", calonMahasiswa[i].asalSekolah)
+			fmt.Println("Tahun Lulus: ", calonMahasiswa[i].tahunLulus)
+			fmt.Println("Jurusan yang Dituju: ", calonMahasiswa[i].jurusanYangDituju)
+			fmt.Println("Nilai UTBK: ", calonMahasiswa[i].nilaiUTBK)
+			fmt.Println("Status: ", calonMahasiswa[i].status)
+			return 1
 		}
 		if !found {
 			fmt.Printf("🧐  Tidak ditemukan data untuk calon mahasiswa dengan NISN %d 🧐\n", cariNISN)
 			break
 		}
 	}
+	return -1
 }
 
 // Fungsi untuk menu ubah dan hapus
