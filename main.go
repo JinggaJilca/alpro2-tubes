@@ -21,6 +21,8 @@ import (
 ✅ Penggunaan statement break (kecuali dalam repeat-until) dan continue tidak diperbolehkan.
 ✅ Variabel global hanya diperbolehkan untuk menyimpan array utama yang akan diproses.
 */
+const max = 10
+
 type dataPendaftar struct {
 	nisn              int
 	nama              string
@@ -37,12 +39,27 @@ type dataPendaftar struct {
 	status            string
 }
 
-const max = 10
-
 type dataSiswa = [max]dataPendaftar
+
+// Tipe Bentukan untuk login
+type login struct {
+	nama     string
+	password string
+}
+type pengguna = [max]login
+
+// Tipe bentukan untuk calon mahasiswa yang diterima
+type dataMahasiswa struct {
+	nim     int
+	nama    string
+	jurusan string
+}
+type mahasiswa = [max]dataMahasiswa
 
 func main() {
 	var calonMahasiswa dataSiswa
+	var user pengguna
+	var mahasiswa mahasiswa
 	// var mahasigma [10]dataMahasigma
 
 	//Data dummy calon mahasiswa
@@ -159,24 +176,26 @@ selesai:
 					fmt.Println("📊 Pencarian dengan Sequential Search 📊")
 					fmt.Print("Masukkan NISN yang dicari: ")
 					fmt.Scan(&cariNISN)
-					hasil := sequentialSearchNISN(&calonMahasiswa, cariNISN)
+					hasilSequen := sequentialSearchNISN(&calonMahasiswa, cariNISN)
 
-					if hasil == -1 {
+					if hasilSequen == -1 {
 						fmt.Printf("🧐  Tidak ditemukan data untuk calon mahasiswa dengan NISN %d 🧐\n", cariNISN)
+						break menuCari
+					} else {
+						switch menuEditable() {
+						case 1:
+							// Ubah
+							ubahDataCalon(&calonMahasiswa, cariNISN)
+						case 2:
+							//Hapus
+							calonMahasiswa = hapusDataSsByNISN(&calonMahasiswa, cariNISN)
+						case 3:
+							break menuCari
+						default:
+							break
+						}
 					}
 
-					switch menuEditable() {
-					case 1:
-						// Ubah
-						ubahDataCalon(&calonMahasiswa, cariNISN)
-					case 2:
-						//Hapus
-						calonMahasiswa = hapusDataSsByNISN(&calonMahasiswa, cariNISN)
-					case 3:
-						break menuCari
-					default:
-						break
-					}
 				case 2:
 					fmt.Println("🔍Pencarian dengan Binary Search🔍")
 					//Urutkan data
@@ -184,18 +203,24 @@ selesai:
 					//Input NISN
 					fmt.Print("Masukkan NISN yang dicari: ")
 					fmt.Scan(&cariNISN)
-					binarySearchNISN(&calonMahasiswa, cariNISN)
-					switch menuEditable() {
-					case 1:
-						//Ubah
-						ubahDataCalon(&calonMahasiswa, cariNISN)
-					case 2:
-						//Hapus
-						calonMahasiswa = hapusDataBsByNISN(&calonMahasiswa, cariNISN)
-					case 3:
+					hasilBinary := binarySearchNISN(&calonMahasiswa, cariNISN)
+					if hasilBinary != -1 {
+						tampilkanBedasarkanNISN(calonMahasiswa, cariNISN)
+						switch menuEditable() {
+						case 1:
+							//Ubah
+							ubahDataCalon(&calonMahasiswa, cariNISN)
+						case 2:
+							//Hapus
+							calonMahasiswa = hapusDataBsByNISN(&calonMahasiswa, cariNISN)
+						case 3:
+							break menuCari
+						default:
+							break
+						}
+					} else {
+						fmt.Printf("🧐  Tidak ditemukan data untuk calon mahasiswa dengan NISN %d 🧐\n", cariNISN)
 						break menuCari
-					default:
-						break
 					}
 
 				default:
@@ -376,6 +401,30 @@ func sequentialSearchNISN(calonMahasiswa *dataSiswa, cariNISN int) int {
 	return hasil
 }
 
+// Fungsi menampilkan data calon mahasiswa bedasarkan NISN
+func tampilkanBedasarkanNISN(calonMahasiswa dataSiswa, nisn int) {
+	for i := 0; i < len(calonMahasiswa); i++ {
+		if calonMahasiswa[i].nisn == nisn {
+			fmt.Printf("🕵️  Ditemukan Data Calon Mahasiswa dengan NISN %d 🕵️\n", nisn)
+			fmt.Println("NISN: ", calonMahasiswa[i].nisn)
+			fmt.Println("Nama: ", calonMahasiswa[i].nama)
+			fmt.Println("Tempat Lahir: ", calonMahasiswa[i].tempatLahir)
+			fmt.Println("Tanggal Lahir: ", calonMahasiswa[i].tanggalLahir)
+			fmt.Println("Jenis Kelamin: ", calonMahasiswa[i].jenisKelamin)
+			fmt.Println("Agama: ", calonMahasiswa[i].agama)
+			fmt.Println("Email: ", calonMahasiswa[i].email)
+			fmt.Println("Jurusan: ", calonMahasiswa[i].jurusan)
+			fmt.Println("Asal Sekolah: ", calonMahasiswa[i].asalSekolah)
+			fmt.Println("Tahun Lulus: ", calonMahasiswa[i].tahunLulus)
+			fmt.Println("Jurusan yang Dituju: ", calonMahasiswa[i].jurusanYangDituju)
+			fmt.Println("Nilai UTBK: ", calonMahasiswa[i].nilaiUTBK)
+			fmt.Println("Status: ", calonMahasiswa[i].status)
+		}
+
+	}
+
+}
+
 // Fungsi untuk penarian (binary search)
 func binarySearchNISN(calonMahasiswa *dataSiswa, cariNISN int) int {
 	low := 0
@@ -400,6 +449,8 @@ func hapusDataBsByNISN(calonMahasiswa *dataSiswa, cariNisn int) dataSiswa {
 	if idx == -1 {
 		fmt.Println("404 data not found")
 		return *calonMahasiswa
+	} else {
+		fmt.Println("🗑️ Data mahasiswa berhasil dihapus")
 	}
 
 	var newData [max]dataPendaftar
@@ -442,7 +493,6 @@ func hapusDataSsByNISN(calonMahasiswa *dataSiswa, cariNisn int) dataSiswa {
 
 	return newData
 }
-
 
 func menuEditable() int {
 	var aksi int
@@ -572,7 +622,7 @@ func mainMenu() int {
 }
 
 // ============ *Kalau ada fitur login beb, jangan panik duluw
-/*
+
 func verifikasiLogin() {
 	var nama, password string
 	fmt.Println("======= SELAMAT DATANG =======")
@@ -591,4 +641,3 @@ func verifikasiLogin() {
 	default:
 	}
 }
-*/
