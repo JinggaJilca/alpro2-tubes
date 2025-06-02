@@ -36,11 +36,6 @@ type dataPendaftar struct {
 	nilaiUTBK         float64
 	status            string
 }
-type dataMahasigma struct {
-	nim     int
-	nama    string
-	jurusan string
-}
 
 const max = 10
 
