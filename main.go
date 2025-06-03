@@ -55,6 +55,8 @@ type dataMahasiswa struct {
 }
 type mahasiswa = [max]dataMahasiswa
 
+var mahasigma mahasiswa
+
 func main() {
 	var calonMahasiswa dataSiswa
 	//Ubah nama dan password kalian yeah 💌
@@ -64,7 +66,6 @@ func main() {
 		{"Nevytachan", "nevytachan"},
 		{"Nayyachan", "nayyachan"},
 	}
-	// var mahasiswa mahasiswa
 
 	//Data dummy calon mahasiswa
 
@@ -91,7 +92,7 @@ func main() {
 	// calonMahasiswa[19] = dataPendaftar{nisn: 1234567909, nama: "Siti Mulyani", tempatLahir: "Semarang", tanggalLahir: "2001-08-20", jenisKelamin: "Perempuan", agama: "Hindu", email: "siti@email.com", jurusan: "IPS", asalSekolah: "SMA 20 Semarang", tahunLulus: 2019, jurusanYangDituju: "Manajemen", nilaiUTBK: 660}
 
 	//Jika nilai UTBK >= 600 maka status diterima
-	status(&calonMahasiswa) //Hapus jika menggunakan input manual
+	statusPendaftaran(&calonMahasiswa) //Hapus jika menggunakan input manual
 
 	fmt.Println("🏫 SELAMAT DATANG 🏫")
 	fmt.Println("Penerimaan Mahasiswa Bukit Duri")
@@ -247,7 +248,7 @@ awalProgram:
 						switch pilMenuMahasiswa {
 						case 1:
 							fmt.Println("Menampilkan data siswa yang diterima")
-							mahasiswaDiterima(&calonMahasiswa)
+							mahasiswaDiterima(mahasigma)
 						case 2:
 							fmt.Println("Menampilkan data siswa yang ditolak")
 							mahasiswaDitolak(&calonMahasiswa)
@@ -269,21 +270,34 @@ awalProgram:
 }
 
 // Fungsi menampilkan mahasiswa yang diterima
-func mahasiswaDiterima(calonMahasiswa *dataSiswa) {
+func mahasiswaDiterima(mahasigma mahasiswa) {
 	fmt.Println("Mahasiswa yang diterima: ")
-	for _, m := range calonMahasiswa {
-		if m.status == "Diterima" {
-			fmt.Println("-", m.nama)
-		}
+	for i := 0; i < len(mahasigma); i++ {
+		fmt.Println(i+1, ".Nama: ", mahasigma[i].nama)
+		fmt.Println("NIM: ", mahasigma[i].nim)
+		fmt.Println("Jurusan: ", mahasigma[i].jurusan)
+		fmt.Println()
 	}
 }
 
 // Fungsi menampilkan mahasiswa yang ditolak
 func mahasiswaDitolak(calonMahasiswa *dataSiswa) {
 	fmt.Println("Mahasiswa yang ditolak: ")
-	for _, m := range calonMahasiswa {
-		if m.status == "Ditolak" {
-			fmt.Println("-", m.nama)
+	for i := 0; i < len(calonMahasiswa); i++ {
+		if calonMahasiswa[i].status == "Ditolak" {
+			fmt.Println(i+1, ". NISN: ", calonMahasiswa[i].nisn)
+			fmt.Println("Nama: ", calonMahasiswa[i].nama)
+			fmt.Println("Tempat Lahir: ", calonMahasiswa[i].tempatLahir)
+			fmt.Println("Tanggal Lahir: ", calonMahasiswa[i].tanggalLahir)
+			fmt.Println("Jenis Kelamin: ", calonMahasiswa[i].jenisKelamin)
+			fmt.Println("Agama: ", calonMahasiswa[i].agama)
+			fmt.Println("Email: ", calonMahasiswa[i].email)
+			fmt.Println("Jurusan: ", calonMahasiswa[i].jurusan)
+			fmt.Println("Asal Sekolah: ", calonMahasiswa[i].asalSekolah)
+			fmt.Println("Tahun Lulus: ", calonMahasiswa[i].tahunLulus)
+			fmt.Println("Jurusan yang Dituju: ", calonMahasiswa[i].jurusanYangDituju)
+			fmt.Println("Nilai UTBK: ", calonMahasiswa[i].nilaiUTBK)
+			fmt.Println()
 		}
 	}
 }
@@ -612,14 +626,30 @@ func selectionSortDescending(calonMahasiswa *dataSiswa) {
 }
 
 // Fungsi untuk menentukan status penerimaan
-func status(calonMahasiswa *dataSiswa) {
-	for i, k := range calonMahasiswa {
-		if k.nilaiUTBK >= 600 {
+func statusPendaftaran(calonMahasiswa *dataSiswa) {
+	for i := 0; i < len(calonMahasiswa); i++ {
+		if calonMahasiswa[i].nilaiUTBK >= 600 {
 			calonMahasiswa[i].status = "Diterima"
+			for i := 0; i < len(calonMahasiswa[i].status); i++ {
+				mahasigma[i].nama = calonMahasiswa[i].nama
+				mahasigma[i].nim = i + 1
+				mahasigma[i].jurusan = calonMahasiswa[i].jurusanYangDituju
+			}
 		} else {
 			calonMahasiswa[i].status = "Ditolak"
 		}
 	}
+
+	// for _, m := range calonMahasiswa {
+	// 	if m.status == "Diterima" {
+	// 		for i := 0; i < len(calonMahasiswa); i++ {
+
+	// 			mahasigma[i].nama = calonMahasiswa[i].nama
+	// 			mahasigma[i].nim = i
+	// 			mahasigma[i].jurusan = calonMahasiswa[i].jurusan
+	// 		}
+	// 	}
+	// }
 }
 
 // Fungsi untuk menambah data
@@ -650,7 +680,7 @@ func tambahData(calonMahasiswa *dataSiswa, banyakData int) {
 		fmt.Scan(&calonMahasiswa[i].jurusanYangDituju)
 		fmt.Print("Masukkan Nilai UTBK: ")
 		fmt.Scan(&calonMahasiswa[i].nilaiUTBK)
-		status(calonMahasiswa)
+		statusPendaftaran(calonMahasiswa)
 		fmt.Println()
 	}
 	fmt.Println("✅ Data berhasil ditambahkan")
