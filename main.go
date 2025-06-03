@@ -60,7 +60,7 @@ func main() {
 	//Ubah nama dan password kalian yeah 💌
 	var pengguna = [4]login{
 		{"admin", "admin"},
-		{"Jinggajil", "jinggajil"},
+		{"Jinggachan", "jinggachan"},
 		{"Nevytachan", "nevytachan"},
 		{"Nayyachan", "nayyachan"},
 	}
@@ -246,11 +246,11 @@ awalProgram:
 						pilMenuMahasiswa := menuMahasiswa()
 						switch pilMenuMahasiswa {
 						case 1:
-							fmt.Println("Menampilkan semua data mahasiswa")
-							//Tampilkan mahasiswa dari array mahasiswa
+							fmt.Println("Menampilkan data siswa yang diterima")
+							mahasiswaDiterima(&calonMahasiswa)
 						case 2:
 							fmt.Println("Menampilkan data siswa yang ditolak")
-							//Tampilkan dari array calon mahasiswa status == "ditolak"
+							mahasiswaDitolak(&calonMahasiswa)
 						case 3:
 							break labelMenuMahasiswa
 						}
@@ -265,6 +265,26 @@ awalProgram:
 			fmt.Println("Silahkan coba lagi")
 		}
 
+	}
+}
+
+// Fungsi menampilkan mahasiswa yang diterima
+func mahasiswaDiterima(calonMahasiswa *dataSiswa) {
+	fmt.Println("Mahasiswa yang diterima: ")
+	for _, m := range calonMahasiswa {
+		if m.status == "Diterima" {
+			fmt.Println("-", m.nama)
+		}
+	}
+}
+
+// Fungsi menampilkan mahasiswa yang ditolak
+func mahasiswaDitolak(calonMahasiswa *dataSiswa) {
+	fmt.Println("Mahasiswa yang ditolak: ")
+	for _, m := range calonMahasiswa {
+		if m.status == "Ditolak" {
+			fmt.Println("-", m.nama)
+		}
 	}
 }
 
@@ -597,7 +617,7 @@ func status(calonMahasiswa *dataSiswa) {
 		if k.nilaiUTBK >= 600 {
 			calonMahasiswa[i].status = "Diterima"
 		} else {
-			calonMahasiswa[i].status = "Tidak Diterima"
+			calonMahasiswa[i].status = "Ditolak"
 		}
 	}
 }
