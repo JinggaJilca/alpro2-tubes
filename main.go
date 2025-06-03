@@ -120,30 +120,29 @@ awalProgram:
 								fmt.Println("3. Insertion Sort (Ascending)")
 								fmt.Println("4. Insertion Sort (Descending)")
 								fmt.Println("5. Kembali")
-								fmt.Print("Pilih metode pengurutan: ")
+								fmt.Print("Pilih metode: ")
 								fmt.Scan(&metode)
 
 								switch metode {
 								case 1:
-									fmt.Println("Pengurutan dengan Selection Sort (Ascending)")
 									selectionSortAscending(&calonMahasiswa)
+									fmt.Println("✅ Pengurutan dengan Selection Sort (Ascending) berhasil ✅")
 								case 2:
-									fmt.Println("Pengurutan dengan Selection Sort (Descending)")
 									selectionSortDescending(&calonMahasiswa)
-
+									fmt.Println("✅ Pengurutan dengan Selection Sort (Descending) berhasil ✅")
 								case 3:
-									fmt.Println("Pengurutan dengan Insertion Sort (Ascending)")
 									insertionSort_Asc(&calonMahasiswa)
+									fmt.Println("✅ Pengurutan dengan Insertion Sort (Ascending) berhasil ✅")
 								case 4:
-									fmt.Println("Pengurutan dengan Insertion Sort (Descending)")
 									insertionSort_Desc(&calonMahasiswa)
+									fmt.Println("✅ Pengurutan dengan Insertion Sort (Descending) berhasil ✅")
 								case 5:
 									break labelMenuCalonMahasiswa
 								}
 
 							}
 						case 3:
-							fmt.Println("------- Tambah data -------")
+							fmt.Println("------- 📖 Tambah data 📖 -------")
 							var banyakData int
 							fmt.Print("Masukkan banyak data yang akan ditambahkan: ")
 							fmt.Scan(&banyakData)
@@ -167,7 +166,7 @@ awalProgram:
 							}
 						case 4:
 							//Melakukan pencarian data dengan sequential search dan binary search
-							fmt.Println("------- Cari Data -------")
+							fmt.Println("------- 🔍 Cari Data 🔍 -------")
 							var cariNISN int
 						labelMenuCari:
 							for {
@@ -180,7 +179,7 @@ awalProgram:
 								fmt.Scan(&metode)
 								switch metode {
 								case 1:
-									fmt.Println("📊 Pencarian dengan Sequential Search 📊")
+									fmt.Println("🔍 Pencarian dengan Sequential Search 🔍")
 									fmt.Print("Masukkan NISN yang dicari: ")
 									fmt.Scan(&cariNISN)
 									hasilSequen := sequentialSearchNISN(&calonMahasiswa, cariNISN)
@@ -204,7 +203,7 @@ awalProgram:
 									}
 
 								case 2:
-									fmt.Println("🔍Pencarian dengan Binary Search🔍")
+									fmt.Println("🔍 Pencarian dengan Binary Search 🔍")
 									//Urutkan data
 									urutkanNISN(&calonMahasiswa)
 									//Input NISN
@@ -247,17 +246,17 @@ awalProgram:
 						pilMenuMahasiswa := menuMahasiswa()
 						switch pilMenuMahasiswa {
 						case 1:
-							fmt.Println("Menampilkan data siswa yang diterima")
+							fmt.Println("🥳 Menampilkan data siswa yang diterima 🥳")
 							mahasiswaDiterima(mahasigma)
 						case 2:
-							fmt.Println("Menampilkan data siswa yang ditolak")
+							fmt.Println("😊 Menampilkan data siswa yang ditolak 😊")
 							mahasiswaDitolak(&calonMahasiswa)
 						case 3:
 							break labelMenuMahasiswa
 						}
 					}
 				case 3:
-					fmt.Println("Terima kasih telah menggunakan sistem ini")
+					fmt.Println("🪷  Terima kasih telah menggunakan sistem ini 🪷")
 					break awalProgram
 				}
 			}
@@ -273,7 +272,7 @@ awalProgram:
 func mahasiswaDiterima(mahasigma mahasiswa) {
 	fmt.Println("Mahasiswa yang diterima: ")
 	for i := 0; i < len(mahasigma); i++ {
-		fmt.Println(i+1, ".Nama: ", mahasigma[i].nama)
+		fmt.Printf("%d. Nama: %s \n", i+1, mahasigma[i].nama)
 		fmt.Println("NIM: ", mahasigma[i].nim)
 		fmt.Println("Jurusan: ", mahasigma[i].jurusan)
 		fmt.Println()
@@ -514,7 +513,7 @@ func hapusDataBsByNISN(calonMahasiswa *dataSiswa, cariNisn int) dataSiswa {
 		fmt.Println("404 data not found")
 		return *calonMahasiswa
 	} else {
-		fmt.Println("✔️🗑️ Data mahasiswa berhasil dihapus")
+		fmt.Println("✔️ 🗑️ Data mahasiswa berhasil dihapus")
 	}
 
 	var newData [max]dataPendaftar
@@ -627,28 +626,24 @@ func selectionSortDescending(calonMahasiswa *dataSiswa) {
 
 // Fungsi untuk menentukan status penerimaan
 func statusPendaftaran(calonMahasiswa *dataSiswa) {
+	indeks := 0
 	for i := 0; i < len(calonMahasiswa); i++ {
 		if calonMahasiswa[i].nilaiUTBK >= 600 {
 			calonMahasiswa[i].status = "Diterima"
-			for i := 0; i < len(calonMahasiswa[i].status); i++ {
-				mahasigma[i].nama = calonMahasiswa[i].nama
-				mahasigma[i].nim = i + 1
-				mahasigma[i].jurusan = calonMahasiswa[i].jurusanYangDituju
-			}
+			mahasigma[indeks].nama = calonMahasiswa[i].nama
+			mahasigma[indeks].nim = i + 1
+			mahasigma[indeks].jurusan = calonMahasiswa[i].jurusanYangDituju
+			indeks++
 		} else {
 			calonMahasiswa[i].status = "Ditolak"
+
 		}
 	}
-
-	// for _, m := range calonMahasiswa {
-	// 	if m.status == "Diterima" {
-	// 		for i := 0; i < len(calonMahasiswa); i++ {
-
-	// 			mahasigma[i].nama = calonMahasiswa[i].nama
-	// 			mahasigma[i].nim = i
-	// 			mahasigma[i].jurusan = calonMahasiswa[i].jurusan
-	// 		}
-	// 	}
+	// fmt.Println("Banyak :", banyakYangDiterima)
+	// for j := 0; j <= banyakYangDiterima; j++ {
+	// 	mahasigma[j].nama = calonMahasiswa[j].nama
+	// 	mahasigma[j].nim = j + 1
+	// 	mahasigma[j].jurusan = calonMahasiswa[j].jurusanYangDituju
 	// }
 }
 
