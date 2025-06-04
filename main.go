@@ -112,6 +112,7 @@ awalProgram:
 							tampilkanIsi(calonMahasiswa)
 						case 2:
 							fmt.Println("------- Urutkan Data -------")
+						labelUrutkanData:
 							for {
 								var metode int
 								fmt.Println("Pilh metode pengurutan:")
@@ -137,7 +138,7 @@ awalProgram:
 									insertionSort_Desc(&calonMahasiswa)
 									fmt.Println("✅ Pengurutan dengan Insertion Sort (Descending) berhasil ✅")
 								case 5:
-									break labelMenuCalonMahasiswa
+									break labelUrutkanData
 								}
 
 							}
@@ -197,8 +198,6 @@ awalProgram:
 											calonMahasiswa = hapusDataBsByNISN(&calonMahasiswa, cariNISN)
 										case 3:
 											break labelMenuCari
-										default:
-											break
 										}
 									}
 
@@ -230,7 +229,7 @@ awalProgram:
 									}
 
 								default:
-									break labelMenuCalonMahasiswa
+									break labelMenuCari
 								}
 								if metode == 3 {
 									break
@@ -357,11 +356,7 @@ func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 		if calonMahasiswa[i].nisn == cariNISN {
 			switch gantiData {
 			case 1:
-				fmt.Print("Masukkan nama baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputNamaBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].nama = strings.TrimSpace(inputNamaBaru)
+				calonMahasiswa[i].nama = inputString("Masukkan nama baru: ")
 				fmt.Println("🎉 Nama berhasil diganti 🎉")
 				fmt.Println("---------------------------------")
 			case 2:
@@ -380,11 +375,7 @@ func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 				fmt.Println("🎉 Jenis Kelamin berhasil diganti 🎉")
 				fmt.Println("-------------------------------------------")
 			case 5:
-				fmt.Print("Masukkan agama baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputAgamaBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].agama = strings.TrimSpace(inputAgamaBaru)
+				calonMahasiswa[i].agama = inputString("Masukkan agama baru: ")
 				fmt.Println("🎉 Agama berhasil diganti 🎉")
 				fmt.Println("----------------------------------")
 			case 6:
@@ -398,11 +389,7 @@ func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 				fmt.Println("🎉 Jurusan berhasil diganti 🎉")
 				fmt.Println("-----------------------------------")
 			case 8:
-				fmt.Print("Masukkan asal sekolah baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputAsalSekolahBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].asalSekolah = strings.TrimSpace(inputAsalSekolahBaru)
+				calonMahasiswa[i].asalSekolah = inputString("Masukkan asal sekolah baru: ")
 				fmt.Println("🎉 Asal Sekolah berhasil diganti 🎉")
 				fmt.Println("-----------------------------------------")
 			case 9:
@@ -411,16 +398,20 @@ func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 				fmt.Println("🎉 Tahun Lulus berhasil diganti 🎉")
 				fmt.Println("----------------------------------------")
 			case 10:
-				fmt.Print("Masukkan jurusan yang dituju baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputJurusanYangDitujuBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].jurusanYangDituju = strings.TrimSpace(inputJurusanYangDitujuBaru)
+				calonMahasiswa[i].jurusanYangDituju = inputString("Masukkan jurusan yang dituju baru: ")
 				fmt.Println("🎉 Jurusan yang dituju berhasil diganti 🎉")
 				fmt.Println("------------------------------------------------")
 			}
 		}
 	}
+}
+
+func inputString(judul string) string {
+	fmt.Print(judul)
+	reader := bufio.NewReader(os.Stdin)
+	reader.ReadString('\n')
+	input, _ := reader.ReadString('\n')
+	return strings.TrimSpace(input)
 }
 
 // Fungsi untuk pencarian (sequential search)
@@ -612,37 +603,24 @@ func statusPendaftaran(calonMahasiswa *dataSiswa) {
 func tambahData(calonMahasiswa *dataSiswa, banyakData int) {
 
 	for i := 0; i < banyakData; i++ {
-		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Masukkan NISN: ")
 		fmt.Scan(&calonMahasiswa[i].nisn)
-		fmt.Print("Masukkan Nama: ")
-		reader.ReadString('\n')
-		inputNamaNEW, _ := reader.ReadString('\n')
-		calonMahasiswa[i].nama = strings.TrimSpace(inputNamaNEW)
+		calonMahasiswa[i].nama = inputString("Masukkan Nama: ")
 		fmt.Print("Masukkan Tempat Lahir: ")
 		fmt.Scan(&calonMahasiswa[i].tempatLahir)
 		fmt.Print("Masukkan Tanggal Lahir: ")
 		fmt.Scan(&calonMahasiswa[i].tanggalLahir)
 		fmt.Print("Masukkan Jenis Kelamin: ")
 		fmt.Scan(&calonMahasiswa[i].jenisKelamin)
-		fmt.Print("Masukkan Agama: ")
-		reader.ReadString('\n')
-		inputAgamaNEW, _ := reader.ReadString('\n')
-		calonMahasiswa[i].agama = strings.TrimSpace(inputAgamaNEW)
+		calonMahasiswa[i].agama = inputString("Masukkan Agama: ")
 		fmt.Print("Masukkan Email: ")
 		fmt.Scan(&calonMahasiswa[i].email)
 		fmt.Print("Masukkan Jurusan: ")
 		fmt.Scan(&calonMahasiswa[i].jurusan)
-		fmt.Print("Masukkan Asal Sekolah: ")
-		reader.ReadString('\n')
-		inputAsalSekolahNEW, _ := reader.ReadString('\n')
-		calonMahasiswa[i].asalSekolah = strings.TrimSpace(inputAsalSekolahNEW)
+		calonMahasiswa[i].asalSekolah = inputString("Masukkan Asal Sekolah: ")
 		fmt.Print("Masukkan Tahun Lulus: ")
 		fmt.Scan(&calonMahasiswa[i].tahunLulus)
-		fmt.Print("Masukkan Jurusan yang Dituju: ")
-		reader.ReadString('\n')
-		inputJurusanNEW, _ := reader.ReadString('\n')
-		calonMahasiswa[i].jurusanYangDituju = strings.TrimSpace(inputJurusanNEW)
+		calonMahasiswa[i].jurusanYangDituju = inputString("Masukkan Jurusan yang Dituju: ")
 		fmt.Print("Masukkan Nilai UTBK: ")
 		fmt.Scan(&calonMahasiswa[i].nilaiUTBK)
 		statusPendaftaran(calonMahasiswa)
