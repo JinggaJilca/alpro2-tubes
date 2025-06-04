@@ -194,7 +194,7 @@ awalProgram:
 											ubahDataCalon(&calonMahasiswa, cariNISN)
 										case 2:
 											//Hapus
-											calonMahasiswa = hapusDataSsByNISN(&calonMahasiswa, cariNISN)
+											calonMahasiswa = hapusDataBsByNISN(&calonMahasiswa, cariNISN)
 										case 3:
 											break labelMenuCari
 										default:
@@ -366,26 +366,17 @@ func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 				fmt.Println("---------------------------------")
 			case 2:
 				fmt.Print("Masukkan tempat lahir baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputTempatLahirBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].tempatLahir = strings.TrimSpace(inputTempatLahirBaru)
+				fmt.Scan(&calonMahasiswa[i].tempatLahir)
 				fmt.Println("🎉 Tempat lahir berhasil diganti 🎉")
 				fmt.Println("-----------------------------------------")
 			case 3:
 				fmt.Print("Masukkan tanggal lahir baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputTanggalLahirBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].tanggalLahir = strings.TrimSpace(inputTanggalLahirBaru)
+				fmt.Scan(&calonMahasiswa[i].tanggalLahir)
 				fmt.Println("🎉 Tanggal lahir berhasil diganti 🎉")
 				fmt.Println("------------------------------------------")
 			case 4:
 				fmt.Print("Masukkan jenis kelamin baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputJenisKelaminBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].jenisKelamin = strings.TrimSpace(inputJenisKelaminBaru)
+				fmt.Scan(&calonMahasiswa[i].jenisKelamin)
 				fmt.Println("🎉 Jenis Kelamin berhasil diganti 🎉")
 				fmt.Println("-------------------------------------------")
 			case 5:
@@ -398,18 +389,12 @@ func ubahDataCalon(calonMahasiswa *dataSiswa, cariNISN int) {
 				fmt.Println("----------------------------------")
 			case 6:
 				fmt.Print("Masukkan email baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputEmailBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].email = strings.TrimSpace(inputEmailBaru)
+				fmt.Scan(&calonMahasiswa[i].email)
 				fmt.Println("🎉 Email berhasil diganti 🎉")
 				fmt.Println("----------------------------------")
 			case 7:
 				fmt.Print("Masukkan jurusan baru: ")
-				reader := bufio.NewReader(os.Stdin)
-				reader.ReadString('\n')
-				inputJurusanBaru, _ := reader.ReadString('\n')
-				calonMahasiswa[i].jurusan = strings.TrimSpace(inputJurusanBaru)
+				fmt.Scan(&calonMahasiswa[i].jurusan)
 				fmt.Println("🎉 Jurusan berhasil diganti 🎉")
 				fmt.Println("-----------------------------------")
 			case 8:
@@ -533,30 +518,6 @@ func hapusDataBsByNISN(calonMahasiswa *dataSiswa, cariNisn int) dataSiswa {
 	return newData
 }
 
-func hapusDataSsByNISN(calonMahasiswa *dataSiswa, cariNisn int) dataSiswa {
-	idx := binarySearchNISN(calonMahasiswa, cariNisn)
-	if idx == -1 {
-		fmt.Println("404 data not found")
-		return *calonMahasiswa
-	}
-
-	var newData [max]dataPendaftar
-	j := 0
-	for i := 0; i < len(calonMahasiswa); i++ {
-		if i != idx {
-			newData[j] = calonMahasiswa[i]
-			j++
-		}
-	}
-
-	// Bersihkan sisanya
-	for k := j; k < max; k++ {
-		newData[k] = dataPendaftar{}
-	}
-
-	return newData
-}
-
 func menuEditable() int {
 	var aksi int
 	fmt.Println("-------------")
@@ -651,10 +612,13 @@ func statusPendaftaran(calonMahasiswa *dataSiswa) {
 func tambahData(calonMahasiswa *dataSiswa, banyakData int) {
 
 	for i := 0; i < banyakData; i++ {
+		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Masukkan NISN: ")
 		fmt.Scan(&calonMahasiswa[i].nisn)
 		fmt.Print("Masukkan Nama: ")
-		fmt.Scan(&calonMahasiswa[i].nama)
+		reader.ReadString('\n')
+		inputNamaNEW, _ := reader.ReadString('\n')
+		calonMahasiswa[i].nama = strings.TrimSpace(inputNamaNEW)
 		fmt.Print("Masukkan Tempat Lahir: ")
 		fmt.Scan(&calonMahasiswa[i].tempatLahir)
 		fmt.Print("Masukkan Tanggal Lahir: ")
@@ -662,17 +626,23 @@ func tambahData(calonMahasiswa *dataSiswa, banyakData int) {
 		fmt.Print("Masukkan Jenis Kelamin: ")
 		fmt.Scan(&calonMahasiswa[i].jenisKelamin)
 		fmt.Print("Masukkan Agama: ")
-		fmt.Scan(&calonMahasiswa[i].agama)
+		reader.ReadString('\n')
+		inputAgamaNEW, _ := reader.ReadString('\n')
+		calonMahasiswa[i].agama = strings.TrimSpace(inputAgamaNEW)
 		fmt.Print("Masukkan Email: ")
 		fmt.Scan(&calonMahasiswa[i].email)
 		fmt.Print("Masukkan Jurusan: ")
 		fmt.Scan(&calonMahasiswa[i].jurusan)
 		fmt.Print("Masukkan Asal Sekolah: ")
-		fmt.Scan(&calonMahasiswa[i].asalSekolah)
+		reader.ReadString('\n')
+		inputAsalSekolahNEW, _ := reader.ReadString('\n')
+		calonMahasiswa[i].asalSekolah = strings.TrimSpace(inputAsalSekolahNEW)
 		fmt.Print("Masukkan Tahun Lulus: ")
 		fmt.Scan(&calonMahasiswa[i].tahunLulus)
 		fmt.Print("Masukkan Jurusan yang Dituju: ")
-		fmt.Scan(&calonMahasiswa[i].jurusanYangDituju)
+		reader.ReadString('\n')
+		inputJurusanNEW, _ := reader.ReadString('\n')
+		calonMahasiswa[i].jurusanYangDituju = strings.TrimSpace(inputJurusanNEW)
 		fmt.Print("Masukkan Nilai UTBK: ")
 		fmt.Scan(&calonMahasiswa[i].nilaiUTBK)
 		statusPendaftaran(calonMahasiswa)
